@@ -78,7 +78,8 @@ const TEAM_DATA = [
     arena: "Þórishöllin", capacity: 500,
     colors: { primary: "#7f8c8d", secondary: "#e74c3c" },
     budget: 25000000, reputation: 62,
-    logo: "⚡", logoFile: "img/logos/Þór.svg"
+    logo: "⚡"
+    // logoFile intentionally omitted - the Þór.svg file is Þór Akureyri, not Þór Þorlákshöfn
   },
   {
     id: "ia", name: "ÍA", city: "Akureyri",
