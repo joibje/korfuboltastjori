@@ -134,7 +134,7 @@ function renderTeamSelect() {
       <div class="team-grid">
         ${engine.state.teams.map(t => `
           <div class="team-card" onclick="selectTeam('${t.id}')" style="border-color: ${t.colors.primary}">
-            <div class="team-card-logo" style="background: ${t.colors.primary}">${teamLogo(t, 'lg')}</div>
+            <div class="team-card-logo">${teamLogo(t, 'lg')}</div>
             <div class="team-card-name">${t.name}</div>
             <div class="team-card-city">${t.city}</div>
             <div class="team-card-rep">
