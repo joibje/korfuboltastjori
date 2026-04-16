@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="is">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Körfuboltastjóri - Úrvalsdeild Karla</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏀</text></svg>">
+</head>
+<body>
+  <div id="layout">
+    <div id="topbar" class="hidden"></div>
+
+    <nav id="sidebar" class="hidden">
+      <div class="sidebar-title">Stjórnun</div>
+      <div class="nav-item active" data-view="dashboard" onclick="navigate('dashboard')">
+        <span class="nav-icon">🏠</span> Yfirlit
+      </div>
+      <div class="nav-item" data-view="squad" onclick="navigate('squad')">
+        <span class="nav-icon">👥</span> Leikmenn
+      </div>
+      <div class="nav-item" data-view="tactics" onclick="navigate('tactics')">
+        <span class="nav-icon">📋</span> Taktík
+      </div>
+      <div class="nav-item" data-view="transfers" onclick="navigate('transfers')">
+        <span class="nav-icon">🤝</span> Flutningar
+      </div>
+      <div class="nav-item" data-view="finances" onclick="navigate('finances')">
+        <span class="nav-icon">💰</span> Fjármál
+      </div>
+
+      <div class="nav-divider"></div>
+      <div class="sidebar-title">Deild</div>
+
+      <div class="nav-item" data-view="table" onclick="navigate('table')">
+        <span class="nav-icon">📊</span> Stigatafla
+      </div>
+      <div class="nav-item" data-view="results" onclick="navigate('results')">
+        <span class="nav-icon">📅</span> Úrslit
+      </div>
+      <div class="nav-item" data-view="stats" onclick="navigate('stats')">
+        <span class="nav-icon">📈</span> Tölfræði
+      </div>
+      <div class="nav-item" data-view="playoffs" onclick="navigate('playoffs')">
+        <span class="nav-icon">🏆</span> Úrslitakeppni
+      </div>
+      <div class="nav-item" data-view="news" onclick="navigate('news')">
+        <span class="nav-icon">📰</span> Fréttir
+      </div>
+
+      <div class="nav-divider"></div>
+
+      <div class="nav-action">
+        <button onclick="simulateWeek()" class="btn btn-primary" style="width:100%">⏩ Næsta vika</button>
+      </div>
+      <div class="nav-action" style="margin-top: 4px;">
+        <button onclick="playNextMatch()" class="btn btn-secondary" style="width:100%">🏀 Spila leik</button>
+      </div>
+    </nav>
+
+    <main id="app"></main>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/engine.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
