@@ -24,6 +24,16 @@ function getTeamById(id) {
   return engine.state.teams.find(t => t.id === id);
 }
 
+function teamLogo(team, size = 'sm') {
+  if (!team) return '';
+  const sizes = { xs: 16, sm: 22, md: 32, lg: 48, xl: 72 };
+  const px = sizes[size] || 22;
+  if (team.logoFile) {
+    return `<img src="${team.logoFile}" alt="${team.name}" class="team-logo team-logo-${size}" style="width:${px}px;height:${px}px;" onerror="this.onerror=null;this.replaceWith(document.createTextNode('${team.logo || '🏀'}'));">`;
+  }
+  return `<span class="team-logo-emoji">${team.logo || '🏀'}</span>`;
+}
+
 function getPlayerTeam() {
   return getTeamById(engine.state.playerTeam);
 }
@@ -66,7 +76,7 @@ function updateTopBar() {
   const topbar = $('#topbar');
   if (topbar) {
     html(topbar, `
-      <div class="topbar-team">${team.logo} ${team.name}</div>
+      <div class="topbar-team">${teamLogo(team, 'sm')} ${team.name}</div>
       <div class="topbar-info">
         <span>Vika ${engine.state.currentWeek + 1}/${engine.state.schedule.length}</span>
         <span>|</span>
@@ -124,7 +134,7 @@ function renderTeamSelect() {
       <div class="team-grid">
         ${engine.state.teams.map(t => `
           <div class="team-card" onclick="selectTeam('${t.id}')" style="border-color: ${t.colors.primary}">
-            <div class="team-card-logo" style="background: ${t.colors.primary}">${t.logo}</div>
+            <div class="team-card-logo" style="background: ${t.colors.primary}">${teamLogo(t, 'lg')}</div>
             <div class="team-card-name">${t.name}</div>
             <div class="team-card-city">${t.city}</div>
             <div class="team-card-rep">
@@ -175,7 +185,7 @@ function renderDashboard() {
   const app = $('#app');
   html(app, `
     <div class="dashboard">
-      <h2>${team.logo} ${team.name}</h2>
+      <h2>${teamLogo(team, 'md')} ${team.name}</h2>
 
       <div class="dash-grid">
         <div class="dash-card">
@@ -240,7 +250,7 @@ function renderDashboard() {
               ${standings.slice(0, 6).map((t, i) => `
                 <tr class="${t.id === engine.state.playerTeam ? 'highlight-row' : ''}">
                   <td>${i + 1}</td>
-                  <td>${t.logo} ${t.name}</td>
+                  <td>${teamLogo(t, 'xs')} ${t.name}</td>
                   <td>${t.wins}</td>
                   <td>${t.losses}</td>
                   <td><strong>${t.wins * 2}</strong></td>
@@ -551,7 +561,7 @@ function renderMatchLive() {
     <div class="live-match">
       <div class="live-scoreboard" style="background: linear-gradient(135deg, ${m.homeColors.primary}, ${m.awayColors.primary})">
         <div class="live-sb-team live-sb-home">
-          <span class="live-sb-logo">${m.homeLogo}</span>
+          <span class="live-sb-logo">${teamLogo(getTeamById(m.homeId), 'lg')}</span>
           <span class="live-sb-name">${m.homeName}</span>
         </div>
         <div class="live-sb-center">
@@ -570,7 +580,7 @@ function renderMatchLive() {
           </div>
         </div>
         <div class="live-sb-team live-sb-away">
-          <span class="live-sb-logo">${m.awayLogo}</span>
+          <span class="live-sb-logo">${teamLogo(getTeamById(m.awayId), 'lg')}</span>
           <span class="live-sb-name">${m.awayName}</span>
         </div>
       </div>
@@ -762,7 +772,7 @@ function renderGameEnd(m) {
                 return `
                   <tr class="${player.team === engine.state.playerTeam ? 'highlight-row' : ''}">
                     <td>${player.name}</td>
-                    <td>${player.team === m.homeId ? m.homeLogo : m.awayLogo}</td>
+                    <td>${teamLogo(getTeamById(player.team), 'xs')}</td>
                     <td><strong>${s.pts}</strong></td>
                     <td>${s.reb}</td>
                     <td>${s.ast}</td>
@@ -1092,7 +1102,7 @@ function renderMatchResult(match) {
     <div class="match-view">
       <div class="match-header" style="background: linear-gradient(135deg, ${homeTeam.colors.primary}, ${awayTeam.colors.primary})">
         <div class="match-team match-home">
-          <div class="match-logo">${homeTeam.logo}</div>
+          <div class="match-logo">${teamLogo(homeTeam, 'xl')}</div>
           <div class="match-team-name">${homeTeam.name}</div>
         </div>
         <div class="match-score">
@@ -1100,7 +1110,7 @@ function renderMatchResult(match) {
           <div class="score-label">${match.playoff ? 'URSLIT' : `Vika ${match.week + 1}`}</div>
         </div>
         <div class="match-team match-away">
-          <div class="match-logo">${awayTeam.logo}</div>
+          <div class="match-logo">${teamLogo(awayTeam, 'xl')}</div>
           <div class="match-team-name">${awayTeam.name}</div>
         </div>
       </div>
@@ -1132,7 +1142,7 @@ function renderMatchResult(match) {
                 .map(({ player, stats }) => `
                   <tr class="${player.team === engine.state.playerTeam ? 'highlight-row' : ''}">
                     <td><a href="#" onclick="navigate('player', ${player.id}); return false;" class="player-link">${player.name}</a></td>
-                    <td>${getTeamById(player.team)?.logo || ''}</td>
+                    <td>${teamLogo(getTeamById(player.team), 'xs')}</td>
                     <td><strong>${stats.pts}</strong></td>
                     <td>${stats.reb}</td>
                     <td>${stats.ast}</td>
@@ -1183,7 +1193,7 @@ function renderTable() {
           ${standings.map((t, i) => `
             <tr class="${t.id === engine.state.playerTeam ? 'highlight-row' : ''} ${i < 8 ? 'playoff-zone' : ''}">
               <td><strong>${i + 1}</strong></td>
-              <td>${t.logo} ${t.name}</td>
+              <td>${teamLogo(t, 'xs')} ${t.name}</td>
               <td>${t.wins + t.losses}</td>
               <td>${t.wins}</td>
               <td>${t.losses}</td>
@@ -1252,7 +1262,7 @@ function renderTransfers() {
               return `
                 <tr>
                   <td><a href="#" onclick="navigate('player', ${p.id}); return false;" class="player-link ${p.foreign ? 'foreign' : ''}">${p.name}</a></td>
-                  <td>${getTeamById(p.team)?.logo || ''} ${getTeamById(p.team)?.name || ''}</td>
+                  <td>${teamLogo(getTeamById(p.team), 'xs')} ${getTeamById(p.team)?.name || ''}</td>
                   <td><span class="pos-badge pos-${p.pos.toLowerCase()}">${p.pos}</span></td>
                   <td>${p.age}</td>
                   <td><span class="ovr-badge ovr-${getOvrClass(p.ovr)}">${p.ovr}</span></td>
@@ -1379,7 +1389,7 @@ function renderPlayerDetail(playerId) {
         <div class="pd-info">
           <h2>${player.name}</h2>
           <div class="pd-meta">
-            ${team ? `${team.logo} ${team.name}` : 'Laus'} | ${POS[player.pos]} | ${player.age} ára
+            ${team ? `${teamLogo(team, 'sm')} ${team.name}` : 'Laus'} | ${POS[player.pos]} | ${player.age} ára
             ${player.foreign ? ` | 🌍 ${player.nationality}` : ' | 🇮🇸'}
           </div>
         </div>
@@ -1456,7 +1466,7 @@ function renderLeagueStats() {
             <tr class="${p.team === engine.state.playerTeam ? 'highlight-row' : ''}">
               <td>${i + 1}</td>
               <td><a href="#" onclick="navigate('player', ${p.id}); return false;" class="player-link">${p.name}</a></td>
-              <td>${getTeamById(p.team)?.logo || ''} ${getTeamById(p.team)?.name || ''}</td>
+              <td>${teamLogo(getTeamById(p.team), 'xs')} ${getTeamById(p.team)?.name || ''}</td>
               <td>${p.seasonStats.gp}</td>
               <td><strong>${p.avgPts.toFixed(1)}</strong></td>
               <td>${(p.seasonStats.reb / Math.max(1, p.seasonStats.gp)).toFixed(1)}</td>
@@ -1497,8 +1507,8 @@ function renderPlayoffs() {
               <h3>${roundName}</h3>
               ${roundSeries.map(s => `
                 <div class="bracket-series ${s.homeWins >= 3 || s.awayWins >= 3 ? 'series-done' : 'series-active'}">
-                  <div class="bracket-team ${s.homeWins >= 3 ? 'series-winner' : ''}">${getTeamById(s.home)?.logo} ${getTeamById(s.home)?.name} <strong>${s.homeWins}</strong></div>
-                  <div class="bracket-team ${s.awayWins >= 3 ? 'series-winner' : ''}">${getTeamById(s.away)?.logo} ${getTeamById(s.away)?.name} <strong>${s.awayWins}</strong></div>
+                  <div class="bracket-team ${s.homeWins >= 3 ? 'series-winner' : ''}">${teamLogo(getTeamById(s.home), 'sm')} ${getTeamById(s.home)?.name} <strong>${s.homeWins}</strong></div>
+                  <div class="bracket-team ${s.awayWins >= 3 ? 'series-winner' : ''}">${teamLogo(getTeamById(s.away), 'sm')} ${getTeamById(s.away)?.name} <strong>${s.awayWins}</strong></div>
                 </div>
               `).join('')}
             </div>

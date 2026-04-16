@@ -8,84 +8,84 @@ const TEAM_DATA = [
     arena: "Grindavíkurvöllur", capacity: 800,
     colors: { primary: "#1a5276", secondary: "#f1c40f" },
     budget: 45000000, reputation: 90,
-    logo: "🟦"
+    logo: "🟦", logoFile: "img/logos/Grindavík.svg"
   },
   {
     id: "tindastoll", name: "Tindastóll", city: "Sauðárkrókur",
     arena: "Grana", capacity: 1200,
     colors: { primary: "#c0392b", secondary: "#ffffff" },
     budget: 40000000, reputation: 87,
-    logo: "🟥"
+    logo: "🟥", logoFile: "img/logos/Tindastóll.svg"
   },
   {
     id: "stjarnan", name: "Stjarnan", city: "Garðabær",
     arena: "Eimskipahöllin", capacity: 1500,
     colors: { primary: "#2980b9", secondary: "#f39c12" },
     budget: 50000000, reputation: 85,
-    logo: "⭐"
+    logo: "⭐", logoFile: "img/logos/Stjarnan.svg"
   },
   {
     id: "valur", name: "Valur", city: "Reykjavík",
     arena: "Valshöllin", capacity: 1200,
     colors: { primary: "#e74c3c", secondary: "#2c3e50" },
     budget: 48000000, reputation: 83,
-    logo: "🔴"
+    logo: "🔴", logoFile: "img/logos/Valur.svg"
   },
   {
     id: "keflavik", name: "Keflavík", city: "Keflavík",
     arena: "Keflavíkurhöllin", capacity: 1000,
     colors: { primary: "#8e44ad", secondary: "#ffffff" },
     budget: 42000000, reputation: 80,
-    logo: "🟪"
+    logo: "🟪", logoFile: "img/logos/Keflavík.svg"
   },
   {
     id: "kr", name: "KR", city: "Reykjavík",
     arena: "KR-höllin", capacity: 1400,
     colors: { primary: "#2c3e50", secondary: "#3498db" },
     budget: 55000000, reputation: 82,
-    logo: "🔵"
+    logo: "🔵", logoFile: "img/logos/KR.svg"
   },
   {
     id: "ir", name: "ÍR", city: "Reykjavík",
     arena: "ÍR-höllin", capacity: 900,
     colors: { primary: "#27ae60", secondary: "#ffffff" },
     budget: 38000000, reputation: 78,
-    logo: "🟩"
+    logo: "🟩", logoFile: "img/logos/ÍR.svg"
   },
   {
     id: "njardvik", name: "Njarðvík", city: "Njarðvík",
     arena: "Njarðvíkurhöllin", capacity: 700,
     colors: { primary: "#d35400", secondary: "#2c3e50" },
     budget: 35000000, reputation: 72,
-    logo: "🟧"
+    logo: "🟧", logoFile: "img/logos/Njarðvík.svg"
   },
   {
     id: "alftanes", name: "Álftanes", city: "Álftanes",
     arena: "Álftaneshöllin", capacity: 600,
     colors: { primary: "#16a085", secondary: "#ecf0f1" },
     budget: 30000000, reputation: 70,
-    logo: "🟢"
+    logo: "🟢", logoFile: "img/logos/Álftanes.svg"
   },
   {
     id: "armann", name: "Ármann", city: "Reykjavík",
     arena: "Ármannshöllin", capacity: 800,
     colors: { primary: "#f39c12", secondary: "#2c3e50" },
     budget: 32000000, reputation: 68,
-    logo: "🟡"
+    logo: "🟡", logoFile: "img/logos/Ármann.svg"
   },
   {
     id: "thor", name: "Þór Þ", city: "Þorlákshöfn",
     arena: "Þórishöllin", capacity: 500,
     colors: { primary: "#7f8c8d", secondary: "#e74c3c" },
     budget: 25000000, reputation: 62,
-    logo: "⚡"
+    logo: "⚡", logoFile: "img/logos/Þór.svg"
   },
   {
     id: "ia", name: "ÍA", city: "Akureyri",
     arena: "ÍA-höllin", capacity: 900,
     colors: { primary: "#2ecc71", secondary: "#f1c40f" },
     budget: 28000000, reputation: 60,
-    logo: "🟨"
+    logo: "🟨", logoFile: "img/logos/ÍA.svg"
   }
 ];
 
