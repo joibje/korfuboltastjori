@@ -1241,10 +1241,16 @@ function renderResults() {
 function renderTransfers() {
   const market = engine.state.transferMarket;
   const freeAgents = engine.state.freeAgents;
+  const tw = engine.getTransferWindowStatus();
 
   html($('#app'), `
     <div class="transfers-view">
       <h2>Leikmannamarkaður</h2>
+
+      <div class="transfer-window-status ${tw.open ? (tw.urgent ? 'tw-urgent' : 'tw-open') : 'tw-closed'}">
+        <span class="tw-icon">${tw.open ? (tw.urgent ? '🚨' : '🟢') : '🔒'}</span>
+        <span class="tw-text">${tw.text}</span>
+      </div>
 
       <div class="transfer-tabs">
         <button onclick="showTransferTab('market')" class="tab-btn active" data-tab="market">Markaður</button>

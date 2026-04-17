@@ -1001,6 +1001,16 @@ class GameEngine {
   }
 
   processWeeklyEvents() {
+    // Transfer window notifications
+    const TRANSFER_DEADLINE_WEEK = 16;
+    if (this.state.currentWeek === TRANSFER_DEADLINE_WEEK - 3) {
+      this.state.news.push({ week: this.state.currentWeek, text: "⚠️ Félagaskiptaglugginn lokar eftir 3 vikur! Klárið ykkar viðskipti." });
+    } else if (this.state.currentWeek === TRANSFER_DEADLINE_WEEK - 1) {
+      this.state.news.push({ week: this.state.currentWeek, text: "🚨 Síðasta vikan til félagaskipta! Glugginn lokar á morgun." });
+    } else if (this.state.currentWeek === TRANSFER_DEADLINE_WEEK) {
+      this.state.news.push({ week: this.state.currentWeek, text: "🔒 Félagaskiptaglugginn er lokaður. Engin félagaskipti heimil til 1. júní." });
+    }
+
     // Random injuries
     this.state.players.forEach(p => {
       if (p.injured) {
@@ -1146,6 +1156,22 @@ class GameEngine {
   }
 
   // Transfer market
+  // Félagaskipti samkvæmt KKÍ reglugerð:
+  // Heimilt: 1. júní - 31. janúar (vikur 1-16 í leiknum)
+  // Óheimilt: 1. febrúar - 31. maí (vikur 17-22)
+  isTransferWindowOpen() {
+    const TRANSFER_DEADLINE_WEEK = 16;
+    return this.state.currentWeek < TRANSFER_DEADLINE_WEEK;
+  }
+
+  getTransferWindowStatus() {
+    const TRANSFER_DEADLINE_WEEK = 16;
+    const weeksLeft = TRANSFER_DEADLINE_WEEK - this.state.currentWeek;
+    if (weeksLeft <= 0) return { open: false, text: "Félagaskiptaglugginn er lokaður (1. feb - 31. maí)", weeksLeft: 0 };
+    if (weeksLeft <= 3) return { open: true, text: `Félagaskiptaglugginn lokar eftir ${weeksLeft} vikur!`, weeksLeft, urgent: true };
+    return { open: true, text: `Félagaskiptaglugginn er opinn (${weeksLeft} vikur eftir)`, weeksLeft };
+  }
+
   generateTransferMarket() {
     this.state.transferMarket = [];
     const availablePlayers = this.state.players.filter(p =>
@@ -1160,6 +1186,7 @@ class GameEngine {
   }
 
   buyPlayer(playerId) {
+    if (!this.isTransferWindowOpen()) return { success: false, message: "Félagaskiptaglugginn er lokaður! Opnast aftur 1. júní." };
     const listing = this.state.transferMarket.find(l => l.playerId === playerId);
     if (!listing) return { success: false, message: "Leikmaður ekki á markaði." };
     if (this.state.finances.budget < listing.price) return { success: false, message: "Ekki nóg fjármagn!" };
@@ -1183,6 +1210,7 @@ class GameEngine {
   }
 
   sellPlayer(playerId) {
+    if (!this.isTransferWindowOpen()) return { success: false, message: "Félagaskiptaglugginn er lokaður! Opnast aftur 1. júní." };
     const player = this.state.players.find(p => p.id === playerId && p.team === this.state.playerTeam);
     if (!player) return { success: false, message: "Getur ekki selt þennan leikmann." };
 
@@ -1247,6 +1275,7 @@ class GameEngine {
   }
 
   signFreeAgent(agentId) {
+    if (!this.isTransferWindowOpen()) return { success: false, message: "Félagaskiptaglugginn er lokaður! Opnast aftur 1. júní." };
     const agent = this.state.freeAgents.find(a => a.id === agentId);
     if (!agent) return { success: false, message: "Leikmaður ekki tiltækur." };
 
