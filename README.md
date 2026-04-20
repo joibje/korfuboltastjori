@@ -1,6 +1,6 @@
 # 🏀 Körfuboltastjóri
 
-> Vafrabasaður Football Manager-stíll leikur fyrir Úrvalsdeild karla í körfubolta — gerður á nokkrum klukkustundum með Claude Code.
+> Vafrabasaður Football Manager-stíll leikur fyrir Úrvalsdeild karla í körfubolta — gerður með Claude Code.
 
 **🎮 Spila núna:** [joibje.github.io/korfuboltastjori](https://joibje.github.io/korfuboltastjori/)
 
@@ -17,12 +17,13 @@ Fyrirmynd er NBA 2K MyLeague / Eras: þú stjórnar liði í beinni, getur pása
 ## Hvað er í boði
 
 ### 🏟️ Velja lið
-- Öll 12 liðin í úrvalsdeildinni: Grindavík, Tindastóll, Stjarnan, Valur, Keflavík, KR, ÍR, Njarðvík, Álftanes, Ármann, Þór Þ, ÍA
+- Öll 12 liðin í úrvalsdeildinni með **raunverulegum SVG logóum**
+- Grindavík, Tindastóll, Stjarnan, Valur, Keflavík, KR, ÍR, Njarðvík, Álftanes, Ármann, Þór Þ, ÍA
 - Hvert lið með sínum litum, heimavelli, fjárhagsáætlun og reputation
 
 ### 👥 Leikmannakerfið
 - **213 raunverulegir leikmenn** með stats úr tímabilinu
-- **12 manna leikdagsskrá** (skv. reglum) — 5 starters + 7 á bekk
+- **12 manna leikdagsskrá** (skv. KKÍ reglum) — 5 starters + 7 á bekk
 - OVR einkunn, orka, morall, meiðsli, samningar
 - Seldu/keyptu leikmenn, skrifaðu undir lausa
 
@@ -48,6 +49,12 @@ Fyrirmynd er NBA 2K MyLeague / Eras: þú stjórnar liði í beinni, getur pása
 - **Úrslitakeppni:** Efstu 8 lið, best-of-5 einvígi
 - Meistaratitill í lokin
 
+### 🤝 Félagaskipti (KKÍ reglur)
+- **Félagaskiptaglugginn** opinn vikur 1-16 (1. júní - 31. janúar)
+- Lokaður vikur 17-22 (1. febrúar - 31. maí)
+- Viðvaranir þegar glugginn er að lokast
+- Kaupa/selja/skrifa undir — allt lokað þegar glugginn lokar
+
 ### 💰 Fjármál
 - Sjóður, vikulegar tekjur, styrktarfé, miðasala
 - Laun leikmanna — erlendir miklu dýrari
@@ -55,6 +62,7 @@ Fyrirmynd er NBA 2K MyLeague / Eras: þú stjórnar liði í beinni, getur pása
 
 ### 📰 Fréttir
 - Leikúrslit, meiðsli, flutningar
+- Félagaskiptagluggaviðvaranir
 - Úrslitakeppnisframvinda
 
 ---
@@ -63,8 +71,8 @@ Fyrirmynd er NBA 2K MyLeague / Eras: þú stjórnar liði í beinni, getur pása
 
 Allt UI og leiklýsing á ekta íslensku körfuboltamáli:
 
-| Hugtak | Notkun |
-|--------|--------|
+| Hugtak | Enska |
+|--------|-------|
 | **Fráköst** | rebounds |
 | **Stoðsendingar** | assists |
 | **Stela** | steal |
@@ -79,6 +87,7 @@ Allt UI og leiklýsing á ekta íslensku körfuboltamáli:
 | **Atkvæðamestur** | leading scorer |
 | **Skotnýting** | shooting efficiency |
 | **Frákastabarátta** | rebounding battle |
+| **Félagaskiptaglugginn** | transfer window |
 
 ---
 
@@ -90,7 +99,9 @@ Pure **HTML + CSS + Vanilla JS** — engar framework dependencies, engin build s
 BBM/
 ├── index.html          # Entry point
 ├── css/
-│   └── style.css       # Alla stílun (NBA 2K-ish dark theme)
+│   └── style.css       # Dark theme (NBA 2K-ish)
+├── img/
+│   └── logos/          # SVG logó allra liða
 └── js/
     ├── data.js         # 12 lið, 213 leikmenn, match events
     ├── engine.js       # Game engine, simulation, live match
@@ -107,23 +118,14 @@ BBM/
 
 - **[korfustatt.is](https://www.korfustatt.is)** — 213 leikmenn með ppg, rpg, apg, FG%, 3P%, FT%, aldri, leikjum spilaðum
 - **[kki.is](https://kki.is)** — staðfesting á liðsskrá og leikmannaflutningum
-
-Þetta er fyrsta heildartímabilið (2025-26) í leiknum. Næstu tímabil notar prósedúral leikmenn ofan á núverandi grunn.
-
----
-
-## Skjáskot
-
-*(Aðalvalmynd með 🏀 og "KÖRFUBOLTASTJÓRI" titli)*
-*(Leikur í gangi með scoreboard, event log, lineup og controls)*
-*(Stigatafla með formi og stigamismun)*
+- **KKÍ handbók um leikjahald** — félagaskiptareglur, 12 manna leikdagsskrá
 
 ---
 
 ## Byggt með
 
 - **Claude Code** — Anthropic's AI coding assistant
-- Gögn: korfustatt.is, kki.is
+- Gögn: korfustatt.is, kki.is, KKÍ handbók
 - Hönnunarfyrirmynd: NBA 2K MyLeague, Football Manager
 
 ---
@@ -138,6 +140,7 @@ BBM/
 - [ ] Fleiri tölfræði (PER, true shooting %)
 - [ ] Multiplayer mode
 - [ ] Mobile-optimized UI
+- [ ] Þór Þorlákshöfn logo
 
 ---
 
